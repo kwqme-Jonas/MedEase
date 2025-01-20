@@ -57,7 +57,7 @@ const PatientForm = () => {
                 iconSrc="/assets/icons/user.svg"
                 iconAlt="user"
             />
-
+            
             <Button type="submit">Submit</Button>
         </form>
   </Form>
