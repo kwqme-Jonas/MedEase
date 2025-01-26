@@ -96,6 +96,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                     control={form.control}
                     name="birthDate"
                     label="Date of Birth"
+                    placeholder="06/06/1998"
                 />
 
                 <CustomFormField 
@@ -121,11 +122,6 @@ const RegisterForm = ({ user }: { user: User }) => {
                 />
             </div>
 
-            {/*<section className="space-y-6">
-                <div className="mb-9 space-y-1">
-                    <h2 className="sub-header">Medical Information</h2>
-                </div>
-            </section>*/}
 
             <div className="flex flex-col gap-6 xl:flex-row">
                 <CustomFormField 
@@ -142,8 +138,30 @@ const RegisterForm = ({ user }: { user: User }) => {
                     label="Occupation"
                     placeholder="Software Engineer"
                 />
-
             </div>
+
+            <div className="flex flex-col gap-6 xl:flex-row">
+                <CustomFormField 
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="emergencyContact"
+                    label="Emergency Contact"
+                    placeholder="(+233)203409081"
+                />
+                <CustomFormField 
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="bloodGroup"
+                    label="Blood Group"
+                    placeholder="O+"
+                />
+            </div>
+
+            <section className="space-y-6">
+                <div className="mb-9 space-y-1">
+                    <h2 className="sub-header">Medical Information</h2>
+                </div>
+            </section>
         
             <SubmitButton  isLoading={isLoading}>Get Started</SubmitButton>
         </form>
