@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patients.actions"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { Doctors, GenderOptions } from "@/constants"
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "../ui/label"
 import { SelectItem } from "../ui/select"
 import Image from "next/image"
@@ -238,11 +238,26 @@ const RegisterForm = ({ user }: { user: User }) => {
                     />
                 </div>
 
-                <section className="space-y-6">
+            <section className="space-y-6">
                 <div className="mb-9 space-y-1">
                     <h2 className="sub-header">Identification and Verification</h2>
                 </div>
             </section>
+
+            <CustomFormField 
+                    fieldType={FormFieldType.SELECT}
+                    control={form.control}
+                    name="identificationType"
+                    label="PIdentification Type"
+                    placeholder="Select an identification type"
+                >
+                    {IdentificationTypes.map((type) => (
+                       <SelectItem key={type} value={type}>
+                         {type}
+                       </SelectItem> 
+                    ))}
+                </CustomFormField>
+
 
             <SubmitButton  isLoading={isLoading}>Get Started</SubmitButton>
         </form>
