@@ -14,8 +14,10 @@ import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patients.actions"
 import { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { GenderOptions } from "@/constants"
+import { Doctors, GenderOptions } from "@/constants"
 import { Label } from "../ui/label"
+import { SelectItem } from "../ui/select"
+import Image from "next/image"
  
 
 const RegisterForm = ({ user }: { user: User }) => {
@@ -95,8 +97,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                     fieldType={FormFieldType.DATE_PICKER}
                     control={form.control}
                     name="birthDate"
-                    label="Date of Birth"
-                    placeholder="06/06/1998"
+                    label="Birth Date"
                 />
 
                 <CustomFormField 
@@ -162,7 +163,33 @@ const RegisterForm = ({ user }: { user: User }) => {
                     <h2 className="sub-header">Medical Information</h2>
                 </div>
             </section>
-        
+
+                <CustomFormField 
+                    fieldType={FormFieldType.SELECT}
+                    control={form.control}
+                    name="primaryPhysician"
+                    label="Primary Physician"
+                    placeholder="Select a physician"
+                >
+                    {Doctors.map((doctor) => (
+                       <SelectItem key={doctor.name} value={doctor.name}>
+                        <div className="flex items-center gap-2">
+                            <Image
+                                src={doctor.image}
+                                height={32}
+                                width={32}
+                                alt={doctor.name}
+                                className="rounded-full border border-dark-400"
+                            />
+                            <p>{doctor.name}</p>
+                        </div>
+                       </SelectItem> 
+                    ))}
+                </CustomFormField>
+
+                <div className="flex flex-col gap-6 xl:flex-row">
+
+                </div>
             <SubmitButton  isLoading={isLoading}>Get Started</SubmitButton>
         </form>
   </Form>
