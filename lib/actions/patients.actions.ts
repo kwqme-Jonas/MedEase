@@ -22,7 +22,7 @@ export const createUser = async (user : CreateUserParams) => {
                 Query.equal('email', [user.email]),
             ]);
 
-            return existingUser?.users[0];
+            return existingUser.users[0];
         }
     }
 };
@@ -30,7 +30,7 @@ export const createUser = async (user : CreateUserParams) => {
 export const getUser = async (userId: string) => {
     try {
         const user = await users.get(userId);
-        
+
         return parseStringify(user);
     } catch (error) {
         console.log(error);
