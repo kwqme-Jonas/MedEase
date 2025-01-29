@@ -18,6 +18,7 @@ import { Doctors, GenderOptions, IdentificationTypes } from "@/constants"
 import { Label } from "../ui/label"
 import { SelectItem } from "../ui/select"
 import Image from "next/image"
+import FileUploader from "../FileUploader"
  
 
 const RegisterForm = ({ user }: { user: User }) => {
@@ -256,7 +257,27 @@ const RegisterForm = ({ user }: { user: User }) => {
                          {type}
                        </SelectItem> 
                     ))}
-                </CustomFormField>
+            </CustomFormField>
+
+            <CustomFormField 
+               fieldType={FormFieldType.INPUT}
+               control={form.control}
+               name="identificationNumber"
+               label="Identification Number"
+               placeholder="123456789"
+           />
+
+            <CustomFormField 
+                    fieldType={FormFieldType.SKELETON}
+                    control={form.control}
+                    name="identificationDocument"
+                    label="Scanned copy of identification"
+                    renderSkeleton={(field) => (
+                       <FormControl>
+                        <FileUploader/>
+                       </FormControl>
+                    )}
+            />
 
 
             <SubmitButton  isLoading={isLoading}>Get Started</SubmitButton>
