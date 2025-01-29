@@ -221,6 +221,29 @@ const RegisterForm = ({ user }: { user: User }) => {
                     />
                 </div>
 
+                <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField 
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="familyMedicalHistory"
+                        label="Family medical history"
+                        placeholder="Mother had brain cancer"
+                    />
+                    <CustomFormField 
+                        fieldType={FormFieldType.TEXTAREA}
+                        control={form.control}
+                        name="pastMedicalHistory"
+                        label="Past medical history"
+                        placeholder="Appendectomy, Tosillectomy"
+                    />
+                </div>
+
+                <section className="space-y-6">
+                <div className="mb-9 space-y-1">
+                    <h2 className="sub-header">Identification and Verification</h2>
+                </div>
+            </section>
+
             <SubmitButton  isLoading={isLoading}>Get Started</SubmitButton>
         </form>
   </Form>
