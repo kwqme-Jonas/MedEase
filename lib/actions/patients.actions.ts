@@ -1,10 +1,10 @@
-import { InputFile } from 'node';
 'use server'
-import { Databases, ID, Query } from "node-appwrite"
-import { BUCKET_ID, DATABASE_ID, PATIENT_COLLECTION_ID, PROJECT_ID, storage, users } from "../appwrite.config"
+import { ID, Query } from "node-appwrite"
+import { InputFile } from "node-appwrite/file";
+import { BUCKET_ID, DATABASE_ID, PATIENT_COLLECTION_ID, PROJECT_ID, databases, storage, users } from "../appwrite.config"
 import { parseStringify } from "../utils";
 
-import { InputFile } from "node-appwrite/file";
+
 
 export const createUser = async (user : CreateUserParams) => {
     try {
@@ -52,7 +52,8 @@ export const registerPatient = async ({ identificationDocument, ...patient }: Re
         file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile)
         }
 
-        const patient = await Databases.createDocument(
+        
+        const newPatient = await databases.createDocument(
             DATABASE_ID!,
             PATIENT_COLLECTION_ID!,
             ID.unique(),
@@ -62,6 +63,8 @@ export const registerPatient = async ({ identificationDocument, ...patient }: Re
                 ...patient
             }
         )
+
+        return parseStringify(newPatient);
     } catch (error) {
         console.log(error);
     }
