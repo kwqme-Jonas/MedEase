@@ -1,7 +1,8 @@
 'use server'
-import { ID, Query } from "node-appwrite"
+
+import { ID, Query } from "node-appwrite";
 import { InputFile } from "node-appwrite/file";
-import { BUCKET_ID, DATABASE_ID, PATIENT_COLLECTION_ID, PROJECT_ID, databases, storage, users } from "../appwrite.config"
+import { BUCKET_ID, DATABASE_ID, ENDPOINT, PATIENT_COLLECTION_ID, PROJECT_ID, databases, storage, users } from "../appwrite.config"
 import { parseStringify } from "../utils";
 
 
@@ -42,6 +43,7 @@ export const getUser = async (userId: string) => {
 
 export const registerPatient = async ({ identificationDocument, ...patient }: RegisterUserParams) => {
     try {
+        
         let file;
 
         if(identificationDocument){
@@ -58,9 +60,11 @@ export const registerPatient = async ({ identificationDocument, ...patient }: Re
             PATIENT_COLLECTION_ID!,
             ID.unique(),
             {
-                identificationDocument: file?.$id || null,
-                identificationDocumentUrl: `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
-                ...patient
+                identificationDocumentId: file?.$id ? file.$id : null,
+                 identificationDocumentUrl: file?.$id
+                 ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view??project=${PROJECT_ID}`
+                 : null,
+                 ...patient,
             }
         )
 
